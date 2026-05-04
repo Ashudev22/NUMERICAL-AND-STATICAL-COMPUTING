@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+    float x[4]={1,2,3,4}, y[4]={1,4,9,16};
+    float diff[4][4];
+    int i,j;
+
+    for(i=0;i<4;i++)
+        diff[i][0]=y[i];
+
+    for(j=1;j<4;j++)
+        for(i=3;i>=j;i--)
+            diff[i][j]=diff[i][j-1]-diff[i-1][j-1];
+
+    float value=3.5, u=(value-x[3])/(x[1]-x[0]);
+    float result=diff[3][0];
+    float term=1;
+
+    for(i=1;i<4;i++){
+        term=term*(u+(i-1))/i;
+        result+=term*diff[3][i];
+    }
+
+    printf("Value = %f",result);
+    return 0;
+}
